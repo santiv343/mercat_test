@@ -8,8 +8,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Navbar />}>
         <Route path="products" element={<ProductsGrid />} />
+        <Route path="summary" element={<Summary />} />
       </Route>
-      <Route path="summary" element={<Summary />} />
     </Routes>
   );
 

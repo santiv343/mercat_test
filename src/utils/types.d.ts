@@ -13,4 +13,5 @@ export type ProductType = {
   };
   tail: string;
   type: string;
+  price: number;
 };
