@@ -1,17 +1,19 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import ProductsGrid from "./components/Products/ProductsGrid";
-import { useGetProductsQuery } from "./redux/services/products/productsApi";
+import Summary from "./components/Summary/Summary";
 
 function App() {
-  const { data, error, isLoading } = useGetProductsQuery();
+  return (
+    <Routes>
+      <Route path="/" element={<Navbar />}>
+        <Route path="products" element={<ProductsGrid />} />
+      </Route>
+      <Route path="summary" element={<Summary />} />
+    </Routes>
+  );
 
-  console.log({ data, error, isLoading });
-
-  if (isLoading && !data) {
-    return <h3>loading</h3>;
-  }
-
-  return data ? <ProductsGrid products={data.amiibo} /> : null;
+  return;
 }
 
 export default App;
