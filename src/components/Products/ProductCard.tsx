@@ -1,10 +1,16 @@
-import { useAppDispatch } from "../../redux/hooks";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { ProductType } from "../../utils/types";
 
 function ProductCard({ product }: { product: ProductType }) {
   const { image, name, type } = product;
   const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cartReducer.cart);
+
+  useEffect(() => {
+    console.log({ cart });
+  }, [cart]);
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
