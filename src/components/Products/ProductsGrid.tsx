@@ -13,7 +13,7 @@ function ProductsGrid() {
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,200px))] w-full p-4 gap-y-8">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,250px))] justify-center items-center w-full p-4 gap-6 ">
       {products.map((product) => (
         <ProductCard key={getProductIdentifier(product)} product={product} />
       ))}

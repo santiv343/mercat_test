@@ -27,7 +27,7 @@ function Navbar() {
         </div>
       </nav>
 
-      <main className="flex w-full justify-between px-4 mt-2 max-w-screen-xl">
+      <main className="flex w-full mx-auto px-4 mt-2 max-w-screen-xl">
         <Outlet />
       </main>
     </>

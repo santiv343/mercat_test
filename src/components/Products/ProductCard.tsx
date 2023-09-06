@@ -16,17 +16,21 @@ function ProductCard({ product }: { product: ProductType }) {
   );
 
   return (
-    <div className="flex flex-col w-full h-full justify-between p-4 rounded-lg border-2 bg-teal-300 relative">
-      <div className="absolute right-2 top-2 w-fit h-fit p-2 bg-orange-500 rounded-lg">
-        <p className="text-xs">{type}</p>
+    <div className="flex flex-col w-full h-full justify-between p-4 rounded-lg border-2 bg-teal-300 relative group">
+      <div className="absolute right-2 top-2 w-fit h-fit p-2 bg-orange-500 rounded-tl-lg rounded-br-lg">
+        <p className="text-xs cursor-default">{type}</p>
       </div>
       <div className="h-1/2">
-        <img className="w-full h-full object-contain" src={image} alt={name} />
+        <img
+          className="w-full h-full object-contain transition-transform group-hover:scale-110"
+          src={image}
+          alt={name}
+        />
       </div>
 
-      <h6>{name}</h6>
+      <h6 className="text-lg mt-8">{name}</h6>
 
-      <h6>$ {price}</h6>
+      <h6 className="font-bold mt-auto mb-4">$ {price}</h6>
 
       {isAlreadyInCart ? (
         <button
