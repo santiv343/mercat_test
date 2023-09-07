@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { getProductIdentifier } from "../../utils/utils";
 import CartItem from "../Cart/CartItem";
@@ -10,21 +11,32 @@ function Summary() {
 
   return (
     <div className="grid grid-cols-2 gap-4 mt-4 w-full h-3/4 justify-center">
-      <div className="flex flex-col bg-stone-800 rounded-lg h-full overflow-hidden p-4">
-        <div className="flex w-full text-amber-50 rounded-lg mb-4">
+      <div className="flex flex-col text-amber-50 bg-stone-800 rounded-lg h-full overflow-hidden p-4">
+        <div className="flex w-full rounded-lg mb-4">
           <h2 className="text-4xl font-bold ">
             Items {`(${cartItems.length})`}
           </h2>
         </div>
-        <div className="flex flex-col gap-4 overflow-y-auto">
-          {cartItems?.map((item) => (
-            <CartItem
-              key={getProductIdentifier(item.product)}
-              quantity={item.quantity}
-              product={item.product}
-            />
-          ))}
-        </div>
+        {cartItems.length > 0 ? (
+          <div className="flex flex-col gap-4 overflow-y-auto">
+            {cartItems?.map((item) => (
+              <CartItem
+                key={getProductIdentifier(item.product)}
+                quantity={item.quantity}
+                product={item.product}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <h2 className="text-3xl mb-4">Your cart is empty!</h2>
+            <Link to="/">
+              <h3 className="text-2xl underline">
+                Click here to buy some products
+              </h3>
+            </Link>
+          </div>
+        )}
       </div>
       <div className="flex flex-col w-full h-full justify-between bg-stone-800 text-amber-50 p-4 rounded-lg mb-4">
         <h2 className="text-4xl font-bold ">Summary</h2>

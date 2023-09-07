@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "../../icons/CloseIcon";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getProductIdentifier } from "../../utils/utils";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
+import { emptyCart } from "../../redux/slices/cartSlice";
 
 function CartDrawer({
   openCart,
@@ -15,6 +16,7 @@ function CartDrawer({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
+  const dispatch = useAppDispatch();
   const totalPrice = cartItems
     .reduce((prev, item) => prev + item.product.price * item.quantity, 0)
     .toFixed(2);
@@ -66,6 +68,14 @@ function CartDrawer({
           ))}
         </div>
         <div className="absolute flex flex-col bottom-0 left-0 w-full h-24 bg-stone-900 justify-center items-center gap-2">
+          {cartItems.length > 0 && (
+            <button
+              onClick={() => dispatch(emptyCart())}
+              className="w-full bg-red-500"
+            >
+              Empty cart
+            </button>
+          )}
           <h6 className="text-xl">Total: $ {totalPrice}</h6>
           <Link to="/summary">
             <h6 onClick={onClose}>Continue to summary</h6>
