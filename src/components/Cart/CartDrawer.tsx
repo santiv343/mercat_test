@@ -1,12 +1,10 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-    decreaseProductQty,
-    increaseProductQty,
-    removeFromCart
-} from "../../redux/slices/cartSlice";
+import CloseIcon from "../../icons/CloseIcon";
+import { useAppSelector } from "../../redux/hooks";
 import { getProductIdentifier } from "../../utils/utils";
+import CartItem from "./CartItem";
+import { Link } from "react-router-dom";
 
 function CartDrawer({
   openCart,
@@ -16,8 +14,10 @@ function CartDrawer({
   onClose: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
+  const totalPrice = cartItems
+    .reduce((prev, item) => prev + item.product.price * item.quantity, 0)
+    .toFixed(2);
 
   // Handle click outside div
   useEffect(() => {
@@ -28,6 +28,11 @@ function CartDrawer({
         }
       }
     }
+    if (openCart) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -37,59 +42,34 @@ function CartDrawer({
   return createPortal(
     <>
       {openCart && (
-        <div className="absolute inset-0 w-screen h-screen bg-black/20 backdrop-blur-[1px] " />
+        <div className="fixed inset-0 w-full h-full bg-black/20 backdrop-blur-[1px] z-[1000]" />
       )}
       <div
         ref={ref}
-        className={`flex flex-col shadow-2xl p-2 fixed right-0 top-0 h-screen bg-black transition-all ${
-          openCart ? "w-28 visible" : "w-0 invisible"
+        className={`flex flex-col shadow-2xl p-2 fixed right-0 top-0 h-screen bg-stone-800 text-amber-50 transition-all z-[1001]   ${
+          openCart ? "w-80 visible" : "w-0 invisible"
         }`}
       >
-        <div className="flex w-full justify-end">
-          <button className="text-red-700" onClick={() => onClose()}>
-            X
+        <div className="flex w-full justify-between items-center p-4">
+          <h3 className="text-xl font-bold">Cart {`(${cartItems.length})`}</h3>
+          <button onClick={() => onClose()}>
+            <CloseIcon className="w-6 h-6 fill-red-500" />
           </button>
         </div>
-        <div className="flex flex-col p-2">
+        <div className="flex flex-col p-2 gap-4 overflow-y-auto">
           {cartItems?.map((item) => (
-            <div
+            <CartItem
               key={getProductIdentifier(item.product)}
-              className="flex flex-col text-white bg-red-600 rounded-lg p-4"
-            >
-              <p
-                onClick={() =>
-                  dispatch(removeFromCart(getProductIdentifier(item.product)))
-                }
-              >
-                {item.product.character}
-              </p>
-              <div className="flex">
-                <button
-                  onClick={() =>
-                    dispatch(
-                      decreaseProductQty(getProductIdentifier(item.product))
-                    )
-                  }
-                  className="flex w-8 h-8 justify-center items-center p-1 border border-black"
-                >
-                  -
-                </button>
-                <p className="flex justify-center items-center p-1 border border-black">
-                  {item.quantity}
-                </p>
-                <button
-                  onClick={() =>
-                    dispatch(
-                      increaseProductQty(getProductIdentifier(item.product))
-                    )
-                  }
-                  className="flex w-8 h-8 justify-center items-center p-1 border border-black"
-                >
-                  +
-                </button>
-              </div>
-            </div>
+              quantity={item.quantity}
+              product={item.product}
+            />
           ))}
+        </div>
+        <div className="absolute flex flex-col bottom-0 left-0 w-full h-24 bg-stone-900 justify-center items-center gap-2">
+          <h6 className="text-xl">Total: $ {totalPrice}</h6>
+          <Link to="/summary">
+            <h6 onClick={onClose}>Proceed to checkout</h6>
+          </Link>
         </div>
       </div>
     </>,

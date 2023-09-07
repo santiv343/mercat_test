@@ -1,15 +1,23 @@
 import { useGetProductsQuery } from "../../redux/services/products/productsApi";
 import { ProductType } from "../../utils/types";
 import { getProductIdentifier, withPrice } from "../../utils/utils";
+import Loading from "../Loading";
 import ProductCard from "./ProductCard";
 
 function ProductsGrid() {
-  const { data, isLoading } = useGetProductsQuery(null);
+  const { data, isLoading, status } = useGetProductsQuery(null);
 
   const products: ProductType[] = withPrice(data?.amiibo.slice(0, 100));
 
+  console.log({ status });
+
   if (isLoading) {
-    return <h3>Loading</h3>;
+    return (
+      <div className="w-full h-full flex flex-col justify-center items-center">
+        <h2 className="text-2xl my-8 font-bold mr-8">Loading products</h2>
+        <Loading className="w-3/4 h-3/4 text-gray-700 fill-blue-600" />;
+      </div>
+    );
   }
 
   return (

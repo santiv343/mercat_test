@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import CartDrawer from "./Cart/CartDrawer";
+import AddToCartIcon from "../icons/AddToCartIcon";
 
 function Navbar() {
   const [openCart, setOpenCart] = useState(false);
@@ -9,25 +10,35 @@ function Navbar() {
     <>
       <CartDrawer onClose={() => setOpenCart(false)} openCart={openCart} />
 
-      <nav className="flex justify-center items-center w-full bg-slate-600">
-        <div className="flex w-full justify-between px-4 py-2 max-w-screen-xl">
-          <h3>Ecommerce</h3>
-          <div className="flex gap-2">
+      <nav className="sticky inset-0 h-12 z-50 mb-4 flex justify-center items-center w-full bg-stone-800 text-amber-50">
+        <div className="flex w-full items-center justify-between px-4 py-2 max-w-screen-xl">
+          <Link to="/">
+            <h3 className="text-2xl font-bold text-amber-50 hover:[text-shadow:_0_2px_0_rgb(0_0_0_/_40%)] transition-transform hover:scale-110">
+              Amiibuy
+            </h3>
+          </Link>
+          <div className="flex gap-8">
             {isSummary ? (
-              <Link to="/products">
-                <h3>Products</h3>
+              <Link to="/">
+                <h3 className="transition-transform hover:scale-110">
+                  Products
+                </h3>
               </Link>
             ) : (
               <Link to="/summary">
-                <h3>Summary</h3>
+                <h3 className="transition-transform hover:scale-110">
+                  Summary
+                </h3>
               </Link>
             )}
-            <button onClick={() => setOpenCart(!openCart)}>Cart</button>
+            <button onClick={() => setOpenCart(!openCart)} className="group">
+              <AddToCartIcon className="w-6 h-6 fill-none stroke-amber-50 transition-transform group-hover:scale-110" />
+            </button>
           </div>
         </div>
       </nav>
 
-      <main className="flex w-full mx-auto px-4 mt-2 max-w-screen-xl">
+      <main className="flex w-full h-full mx-auto px-4 mt-2 max-w-screen-xl">
         <Outlet />
       </main>
     </>
