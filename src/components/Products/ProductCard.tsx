@@ -17,7 +17,7 @@ function ProductCard({ product }: { product: ProductType }) {
 
   return (
     <div className="flex flex-col w-full h-[450px] pb-4 rounded-lg border-2 bg-neutral-600 relative group">
-      <div className="absolute right-2 top-2 w-fit h-fit bg-orange-500 rounded-tl-lg rounded-br-lg p-2 z-10">
+      <div className="absolute right-0 top-0 w-fit h-fit bg-orange-500 rounded-tr-lg p-2 z-10">
         <p className="text-sm font-medium cursor-default">{type}</p>
       </div>
       <div className="h-1/2 bg-stone-800 rounded-t-lg">
@@ -28,7 +28,7 @@ function ProductCard({ product }: { product: ProductType }) {
         />
       </div>
 
-      <h6 className=" italic bg-teal-600 py-2 px-2 text-amber-50">
+      <h6 className="italic bg-teal-600 py-2 px-2 text-amber-50">
         {gameSeries}
       </h6>
 
