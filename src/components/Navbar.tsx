@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import CartDrawer from "./Cart/CartDrawer";
 import AddToCartIcon from "../icons/AddToCartIcon";
+import { useAppSelector } from "../redux/hooks";
 
 function Navbar() {
   const [openCart, setOpenCart] = useState(false);
   const isSummary = useLocation().pathname.includes("summary");
+  const cartItems = useAppSelector((state) => state.cartReducer.cart);
+
   return (
     <>
       <CartDrawer onClose={() => setOpenCart(false)} openCart={openCart} />
@@ -33,8 +36,16 @@ function Navbar() {
                 </h3>
               </Link>
             )}
-            <button onClick={() => setOpenCart(!openCart)} className="group">
+            <button
+              onClick={() => setOpenCart(!openCart)}
+              className="group relative"
+            >
               <AddToCartIcon className="w-6 h-6 fill-none stroke-amber-50 transition-transform group-hover:scale-110" />
+              {cartItems.length > 0 && (
+                <span className="flex absolute -top-2 -right-2 items-center justify-center text-xs rounded-full w-4 h-4 bg-red-500">
+                  {cartItems.length}
+                </span>
+              )}
             </button>
           </div>
         </div>
