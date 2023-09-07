@@ -56,7 +56,7 @@ function CartDrawer({
             <CloseIcon className="w-6 h-6 fill-red-500" />
           </button>
         </div>
-        <div className="flex flex-col p-2 gap-4 overflow-y-auto">
+        <div className="flex flex-col p-2 gap-4 overflow-y-auto mb-24">
           {cartItems?.map((item) => (
             <CartItem
               key={getProductIdentifier(item.product)}
