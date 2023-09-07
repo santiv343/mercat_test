@@ -21,6 +21,8 @@ npm install
 npm run dev
 ```
 
+- Note: this app uses React v18.2.0
+
 ## Usage
 
 Since the API doesn't have a limit option for requests, I've limited the displayed results to 100. I'm planning on add a pagination component in the future. 
