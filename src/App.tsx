@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import ProductsGrid from "./components/Products/ProductsGrid";
 import Summary from "./components/Summary/Summary";
 import MainWrapper from "./components/MainWrapper";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="summary" element={<Summary />} />
         </Route>
       </Route>
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 
