@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  min-height: 100%;
+}
+body {
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
 body {
   background-image: url("../public/img/bg.png");
   background-position: center;

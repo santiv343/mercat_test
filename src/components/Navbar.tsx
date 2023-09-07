@@ -10,7 +10,7 @@ function Navbar() {
     <>
       <CartDrawer onClose={() => setOpenCart(false)} openCart={openCart} />
 
-      <nav className="sticky inset-0 h-12 z-50 mb-4 flex justify-center items-center w-full bg-stone-800 text-amber-50">
+      <nav className="fixed inset-0 h-12 z-50 mb-4 flex justify-center items-center w-full bg-stone-800 text-amber-50">
         <div className="flex w-full items-center justify-between px-4 py-2 max-w-screen-xl">
           <Link to="/">
             <h3 className="text-2xl font-bold text-amber-50 hover:[text-shadow:_0_2px_0_rgb(0_0_0_/_40%)] transition-transform hover:scale-110">
@@ -38,7 +38,7 @@ function Navbar() {
         </div>
       </nav>
 
-      <main className="flex w-full h-full mx-auto px-4 mt-2 max-w-screen-xl">
+      <main className="flex w-full h-full mx-auto px-4 pt-12 max-w-screen-xl">
         <Outlet />
       </main>
     </>

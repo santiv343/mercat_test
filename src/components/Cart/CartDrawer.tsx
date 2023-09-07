@@ -68,7 +68,7 @@ function CartDrawer({
         <div className="absolute flex flex-col bottom-0 left-0 w-full h-24 bg-stone-900 justify-center items-center gap-2">
           <h6 className="text-xl">Total: $ {totalPrice}</h6>
           <Link to="/summary">
-            <h6 onClick={onClose}>Proceed to checkout</h6>
+            <h6 onClick={onClose}>Continue to summary</h6>
           </Link>
         </div>
       </div>
