@@ -10,7 +10,7 @@ function Summary() {
     .toFixed(2);
 
   return (
-    <div className="grid grid-cols-2 gap-4 mt-4 w-full h-3/4 justify-center">
+    <div className="flex flex-col md:grid md:grid-cols-2 gap-4 mt-4 w-full md:h-3/4 justify-center">
       <div className="flex flex-col text-amber-50 bg-stone-800 rounded-lg h-full overflow-hidden p-4">
         <div className="flex w-full rounded-lg mb-4">
           <h2 className="text-4xl font-bold ">
