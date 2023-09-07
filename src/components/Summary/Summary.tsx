@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getProductIdentifier } from "../../utils/utils";
 import CartItem from "../Cart/CartItem";
+import { emptyCart } from "../../redux/slices/cartSlice";
 
 function Summary() {
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
+  const dispatch = useAppDispatch();
   const totalPrice = cartItems
     .reduce((prev, item) => prev + item.product.price * item.quantity, 0)
     .toFixed(2);
@@ -16,6 +18,14 @@ function Summary() {
           <h2 className="text-4xl font-bold ">
             Items {`(${cartItems.length})`}
           </h2>
+          {cartItems.length > 0 && (
+            <button
+              onClick={() => dispatch(emptyCart())}
+              className="w-fit ml-auto bg-red-500 p-4"
+            >
+              Empty cart
+            </button>
+          )}
         </div>
         {cartItems.length > 0 ? (
           <div className="flex flex-col gap-4 overflow-y-auto">

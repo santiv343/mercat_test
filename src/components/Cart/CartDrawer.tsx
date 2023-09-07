@@ -58,7 +58,7 @@ function CartDrawer({
             <CloseIcon className="w-6 h-6 fill-red-500" />
           </button>
         </div>
-        <div className="flex flex-col p-2 gap-4 overflow-y-auto mb-24">
+        <div className="flex flex-col p-2 gap-4 overflow-y-auto mb-28">
           {cartItems?.map((item) => (
             <CartItem
               key={getProductIdentifier(item.product)}
@@ -67,7 +67,7 @@ function CartDrawer({
             />
           ))}
         </div>
-        <div className="absolute flex flex-col bottom-0 left-0 w-full h-24 bg-stone-900 justify-center items-center gap-2">
+        <div className="absolute flex flex-col bottom-0 left-0 w-full h-28 bg-stone-900 justify-center items-center gap-2">
           {cartItems.length > 0 && (
             <button
               onClick={() => dispatch(emptyCart())}
@@ -77,7 +77,10 @@ function CartDrawer({
             </button>
           )}
           <h6 className="text-xl">Total: $ {totalPrice}</h6>
-          <Link to="/summary">
+          <Link
+            to="/summary"
+            className="w-full flex justify-center items-center p-4 bg-teal-500"
+          >
             <h6 onClick={onClose}>Continue to summary</h6>
           </Link>
         </div>
