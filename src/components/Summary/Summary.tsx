@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { getProductIdentifier } from "../../utils/utils";
+import { getProductIdentifier, getTotalPrice } from "../../utils/utils";
 import CartItem from "../Cart/CartItem";
 import { emptyCart } from "../../redux/slices/cartSlice";
 
 function Summary() {
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
   const dispatch = useAppDispatch();
-  const totalPrice = cartItems
-    .reduce((prev, item) => prev + item.product.price * item.quantity, 0)
-    .toFixed(2);
+  const totalPrice = getTotalPrice(cartItems)
 
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 gap-4 mt-4 w-full md:h-3/4 justify-center">

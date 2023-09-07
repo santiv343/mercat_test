@@ -46,3 +46,9 @@ export const generatePrices = (products: ProductType[]) => {
 
   console.log(JSON.stringify(prices));
 };
+
+export const getTotalPrice = (cartItems: CartItemType[]) => {
+  return cartItems
+    .reduce((prev, item) => prev + item.product.price * item.quantity, 0)
+    .toFixed(2);
+};

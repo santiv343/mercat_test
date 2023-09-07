@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { Link } from "react-router-dom";
 import CloseIcon from "../../icons/CloseIcon";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { getProductIdentifier } from "../../utils/utils";
-import CartItem from "./CartItem";
-import { Link } from "react-router-dom";
 import { emptyCart } from "../../redux/slices/cartSlice";
+import { getProductIdentifier, getTotalPrice } from "../../utils/utils";
+import CartItem from "./CartItem";
 
 function CartDrawer({
   openCart,
@@ -17,9 +17,7 @@ function CartDrawer({
   const ref = useRef<HTMLDivElement>(null);
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
   const dispatch = useAppDispatch();
-  const totalPrice = cartItems
-    .reduce((prev, item) => prev + item.product.price * item.quantity, 0)
-    .toFixed(2);
+  const totalPrice = getTotalPrice(cartItems);
 
   // Handle click outside div
   useEffect(() => {
@@ -54,7 +52,7 @@ function CartDrawer({
       >
         <div className="flex w-full justify-between items-center p-4">
           <h3 className="text-xl font-bold">Cart {`(${cartItems.length})`}</h3>
-          <button onClick={() => onClose()}>
+          <button onClick={onClose}>
             <CloseIcon className="w-6 h-6 fill-red-500" />
           </button>
         </div>
