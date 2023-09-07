@@ -1,7 +1,8 @@
 # Mercat test
 
-This is a test for applying to Mercat
-It's a basic front end ecommerce, using:
+This is a test to apply to Mercat.
+
+It is a basic e-commerce front-end, using:
 * Vite
 * Typescript
 * Tailwind
